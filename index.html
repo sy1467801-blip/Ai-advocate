@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#14253d">
+<title>AI Vakeel — Indian Legal Assistant</title>
+<style>
+:root{--navy:#14253d;--gold:#d6ad60;--paper:#f5f6f8;--ink:#202938;--muted:#657184;--line:#dfe4eb;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+header{background:linear-gradient(130deg,#14253d,#233f60);color:white;padding:22px 18px 28px;border-bottom:4px solid var(--gold)}
+.top{max-width:1050px;margin:auto;display:flex;align-items:center;gap:13px}.mark{height:48px;width:48px;border:1px solid #e9cc8b;border-radius:14px;display:grid;place-items:center;font-size:27px;color:#f1d18c}
+h1{font-size:24px;margin:0;letter-spacing:.2px}.tag{margin:4px 0 0;color:#d9e2ee;font-size:13px}
+.wrap{max-width:1050px;margin:22px auto;padding:0 15px 36px;display:grid;grid-template-columns:270px 1fr;gap:18px}
+aside,.panel{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 18px #162b4410}
+aside{padding:18px;height:max-content}.aside-title{font-weight:750;margin:2px 0 12px}
+.mode{display:flex;align-items:center;gap:10px;width:100%;border:1px solid transparent;background:white;text-align:left;padding:12px;border-radius:10px;font-size:14px;color:#344256;cursor:pointer;margin:3px 0}
+.mode.active,.mode:hover{background:#f1f4f8;border-color:#dbe2ec;color:var(--navy)}.ico{font-size:18px;width:23px}
+.sources{border-top:1px solid var(--line);margin-top:18px;padding-top:15px}.sources a{display:block;color:#315e90;font-size:13px;text-decoration:none;padding:6px 0}
+main{min-width:0}.panel{padding:22px}.eyebrow{color:#9a7129;font-weight:800;font-size:11px;letter-spacing:1.4px;text-transform:uppercase}
+h2{margin:7px 0 6px;font-size:24px;color:var(--navy)}.sub{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+label{display:block;font-size:12px;font-weight:700;color:#46546a;margin-bottom:6px}
+select,input,textarea{width:100%;border:1px solid #d5dce6;border-radius:10px;background:white;padding:11px 12px;font:inherit;color:var(--ink);outline:none}
+select:focus,input:focus,textarea:focus{border-color:#547ba7;box-shadow:0 0 0 3px #547ba71a}
+textarea{min-height:150px;resize:vertical;line-height:1.55}.context{min-height:68px}
+.btnrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:13px}.primary{border:0;border-radius:10px;background:var(--navy);color:white;padding:12px 18px;font-weight:750;cursor:pointer}.primary:hover{background:#243f60}.secondary{border:1px solid var(--line);border-radius:10px;background:white;padding:11px 14px;cursor:pointer;color:#344256}
+.status{font-size:12px;color:var(--muted)}.answer{margin-top:18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:none}.answerhead{padding:11px 14px;background:#f5f7fa;display:flex;justify-content:space-between;align-items:center;font-weight:750;font-size:13px}.answerbody{padding:17px;white-space:pre-wrap;line-height:1.65;font-size:14px;overflow-wrap:anywhere}.notice{margin-top:16px;background:#fff8e9;border:1px solid #f0dfb5;border-radius:10px;padding:12px 13px;color:#6e5526;font-size:12px;line-height:1.5}
+footer{text-align:center;color:#798597;font-size:12px;padding:0 16px 25px}
+@media(max-width:760px){.wrap{grid-template-columns:1fr;margin-top:14px}.wrap aside{order:2}.controls{grid-template-columns:1fr}.panel{padding:17px}h2{font-size:21px}.top{align-items:flex-start}.mark{flex-shrink:0}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="mark">⚖</div><div><h1>AI Vakeel</h1><p class="tag">Your Indian Legal Assistant · आपका कानूनी सहायक</p></div></div></header>
+<div class="wrap">
+<aside>
+<div class="aside-title">Legal workspace</div>
+<button class="mode active" data-mode="legal"><span class="ico">💬</span> Ask a legal question</button>
+<button class="mode" data-mode="document"><span class="ico">📝</span> Write a document</button>
+<button class="mode" data-mode="research"><span class="ico">⚖️</span> Legal research</button>
+<button class="mode" data-mode="case"><span class="ico">📂</span> Analyse a case</button>
+<div class="sources"><div class="aside-title">Official legal sources</div>
+<a href="https://www.indiacode.nic.in/" target="_blank" rel="noopener">India Code ↗</a>
+<a href="https://www.sci.gov.in/" target="_blank" rel="noopener">Supreme Court of India ↗</a>
+<a href="https://ecourts.gov.in/" target="_blank" rel="noopener">eCourts Services ↗</a>
+<a href="https://nalsa.gov.in/" target="_blank" rel="noopener">Legal Services Authority ↗</a>
+</div>
+</aside>
+<main>
+<section class="panel">
+<div class="eyebrow">AI-powered · India</div>
+<h2 id="title">Ask your Vakeel</h2>
+<p class="sub" id="subtitle">Describe your legal question in your own words. Include the state and important dates when relevant.</p>
+<div class="controls">
+<div><label for="language">Response language / भाषा</label><select id="language"><option>English</option><option>Hindi</option></select></div>
+<div><label for="jurisdiction">State / jurisdiction</label><select id="jurisdiction"><option>India</option><option>Uttar Pradesh</option><option>Delhi</option><option>Maharashtra</option><option>Bihar</option><option>Rajasthan</option><option>Madhya Pradesh</option><option>Haryana</option><option>Punjab</option><option>Other Indian state/UT</option></select></div>
+</div>
+<div><label for="message" id="promptlabel">What would you like to understand?</label><textarea id="message" placeholder="Example: My landlord is refusing to return my security deposit. What legal steps can I consider?"></textarea></div>
+<div style="margin-top:13px"><label for="context">Extra details (optional)</label><textarea class="context" id="context" placeholder="Relevant dates, notices received, facts, or document details. Avoid unnecessary sensitive personal information."></textarea></div>
+<div class="btnrow"><button class="primary" id="submit">Get legal help →</button><button class="secondary" id="clear">Clear</button><span class="status" id="status" aria-live="polite"></span></div>
+<div class="answer" id="answer"><div class="answerhead"><span>AI Vakeel response</span><button class="secondary" id="copy">Copy text</button></div><div class="answerbody" id="answerbody"></div></div>
+<div class="notice"><strong>Important:</strong> AI Vakeel provides general legal information and draft assistance, not a substitute for a qualified advocate. Laws and procedures can change. Verify citations and deadlines with official sources; have court filings reviewed by an advocate.</div>
+</section>
+</main>
+</div>
+<footer>AI Vakeel · Built for responsible legal information and document drafting</footer>
+<script>
+const modes={
+ legal:{title:"Ask your Vakeel",subtitle:"Describe your legal question in your own words. Include the state and important dates when relevant.",label:"What would you like to understand?",placeholder:"Example: My landlord is refusing to return my security deposit. What legal steps can I consider?",button:"Get legal help →"},
+ document:{title:"Write a legal document",subtitle:"Tell us the document type, recipient, facts, dates, and what you want to request. Unknown details will be left as placeholders.",label:"Which document do you need?",placeholder:"Example: Draft an RTI application to the Public Information Officer of my municipal authority asking for copies of approved building plans and action taken on my complaint.",button:"Draft document →"},
+ research:{title:"Legal research assistant",subtitle:"Describe the legal issue and jurisdiction. Ask for a research plan and official sources to verify.",label:"What legal issue should we research?",placeholder:"Example: Explain the general legal framework for consumer complaints about defective products in India and identify official sources to verify.",button:"Research issue →"},
+ case:{title:"Analyse a case",subtitle:"Summarise the facts or paste a non-sensitive excerpt. Separate facts from assumptions and remove personal identifiers where possible.",label:"What happened in the case?",placeholder:"Include the dispute, current stage, dates, documents available, and what you need to understand.",button:"Analyse case →"}
+};
+let mode="legal";
+document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("active",x===b));const m=modes[mode];document.getElementById("title").textContent=m.title;document.getElementById("subtitle").textContent=m.subtitle;document.getElementById("promptlabel").textContent=m.label;document.getElementById("message").placeholder=m.placeholder;document.getElementById("submit").textContent=m.button;}));
+document.getElementById("submit").addEventListener("click",async()=>{
+ const message=document.getElementById("message").value.trim();if(!message){document.getElementById("status").textContent="Please describe your question first.";return;}
+ const btn=document.getElementById("submit"),status=document.getElementById("status");btn.disabled=true;status.textContent="Working on your request…";document.getElementById("answer").style.display="none";
+ try{const res=await fetch("/api/assist",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message,language:document.getElementById("language").value,mode,jurisdiction:document.getElementById("jurisdiction").value,context:document.getElementById("context").value})});const data=await res.json();if(!res.ok)throw new Error(data.detail||"Request failed.");document.getElementById("answerbody").textContent=data.answer;document.getElementById("answer").style.display="block";status.textContent="Please verify important legal details.";document.getElementById("answer").scrollIntoView({behavior:"smooth",block:"start"});}
+ catch(e){status.textContent=e.message;}finally{btn.disabled=false;}
+});
+document.getElementById("clear").addEventListener("click",()=>{document.getElementById("message").value="";document.getElementById("context").value="";document.getElementById("status").textContent="";document.getElementById("answer").style.display="none";});
+document.getElementById("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(document.getElementById("answerbody").innerText);document.getElementById("copy").textContent="Copied";setTimeout(()=>document.getElementById("copy").textContent="Copy text",1400);}catch{document.getElementById("status").textContent="Copy not available in this browser."; }});
+</script>
+</body></html>
